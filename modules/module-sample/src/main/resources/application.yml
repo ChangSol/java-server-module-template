@@ -1,0 +1,11 @@
+server:
+  port: 8081 #서버 포트지정
+
+spring:
+  profiles:
+    include:
+      - core #core module yml 포함
+    active: local #진행할 active profiles
+
+app:
+  name: module-sample

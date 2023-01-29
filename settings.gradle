@@ -1,0 +1,8 @@
+rootProject.name = 'changsol-server-template'
+include 'module-core'
+include 'module-sample'
+
+//modules 폴더에 집합
+for (project in rootProject.children) {
+    project.projectDir = file("modules/${project.name}")
+}
