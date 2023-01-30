@@ -1,4 +1,4 @@
-package org.changsol.api.utils.mapper;
+package org.changsol.api.apps.bases.mapper;
 
 import org.mapstruct.MappingTarget;
 

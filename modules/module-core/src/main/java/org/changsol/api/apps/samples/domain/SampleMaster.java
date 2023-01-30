@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.changsol.api.utils.entity.BaseEntityLongId;
+import org.changsol.api.apps.bases.domain.BaseDomainIdentity;
 
 /**
  * @author ChangSol
@@ -15,6 +15,6 @@ import org.changsol.api.utils.entity.BaseEntityLongId;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SampleMaster extends BaseEntityLongId {
+public class SampleMaster extends BaseDomainIdentity {
     private String masterName;
 }
