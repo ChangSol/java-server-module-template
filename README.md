@@ -27,9 +27,9 @@ Gradle-7.2<br>
 - https://www.erdcloud.com/
 
 ### Gradle Module 스크립트
-- ex) module-core-domain<br>
-  ./gradlew :module-core-domain:clean :module-core-domain:bootJar <br>
-  java -jar "-Dserver.port=8080" "-Dspring.profiles.active=test" ./module-core-domain-*.jar
+- ex) module-sample<br>
+  ./gradlew :module-sample:clean :module-sample:bootJar <br>
+  java -jar "-Dserver.port=8080" "-Dspring.profiles.active=test" ./module-sample-*.jar
 
 ### Swagger 2 -> 3
 - Springfox -> SpringDoc로 변경 Springboot에서 SpringDoc OpenAPI 3.0
