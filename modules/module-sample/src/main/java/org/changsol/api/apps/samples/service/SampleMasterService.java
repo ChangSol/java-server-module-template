@@ -29,7 +29,10 @@ public class SampleMasterService {
 
         }
 
-        return sampleMasterRepository.findAll().stream().map(SampleMasterMapper.INSTANCE::toResponse).toList();
+        return sampleMasterRepository.findAll()
+                                     .stream()
+                                     .map(SampleMasterMapper.INSTANCE::response)
+                                     .toList();
     }
 
     /**
@@ -40,9 +43,10 @@ public class SampleMasterService {
     @Transactional
     public SampleMasterDto.Response createOne(SampleMasterDto.CreateOrUpdate createOrUpdate){
         //New Object
-        SampleMaster sampleMaster = SampleMasterMapper.INSTANCE.entityCreate(createOrUpdate);
+        SampleMaster sampleMaster = SampleMasterMapper.INSTANCE.create(createOrUpdate);
         sampleMasterRepository.save(sampleMaster);
-        return SampleMasterMapper.INSTANCE.toResponse(sampleMaster);
+
+        return SampleMasterMapper.INSTANCE.response(sampleMaster);
     }
 
     /**
@@ -57,9 +61,9 @@ public class SampleMasterService {
         SampleMaster sampleMaster = sampleMasterRepository.findById(id).orElseThrow(() -> new NotFoundException("SampleMaster를 찾을 수 없습니다."));
 
         //Mapping
-        SampleMasterMapper.INSTANCE.entityUpdate(sampleMaster, createOrUpdate);
+        SampleMasterMapper.INSTANCE.update(sampleMaster, createOrUpdate);
 
-        return SampleMasterMapper.INSTANCE.toResponse(sampleMaster);
+        return SampleMasterMapper.INSTANCE.response(sampleMaster);
     }
 
     /**
@@ -75,6 +79,6 @@ public class SampleMasterService {
         //Delete
         sampleMasterRepository.delete(sampleMaster);
 
-        return SampleMasterMapper.INSTANCE.toResponse(sampleMaster);
+        return SampleMasterMapper.INSTANCE.response(sampleMaster);
     }
 }
