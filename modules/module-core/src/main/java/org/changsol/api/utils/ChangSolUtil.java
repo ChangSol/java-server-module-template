@@ -289,16 +289,15 @@ public class ChangSolUtil {
 	// region 법정동코드
 
 	/**
-	 * 법정동코드는 10자리로 이루어져 있음.
-	 * 알맞는 법정동 코드 반환
-	 * <p>
-	 * 시,도 => 2자리 , 세종특별자치시는 5자리부터 시도 (36110)
-	 * 시,군,구 => 5자리
-	 * 읍,면,동 => 8자리
+	 * 법정동코드는 10자리로 이루어져 있음<br>
+	 * 알맞는 법정동 코드 반환<br>
+	 * 시,도 => 2자리 , 세종특별자치시는 5자리부터 시도 (36110)<br>
+	 * 시,군,구 => 5자리<br>
+	 * 읍,면,동 => 8자리<br>
 	 * 리 => 10자리
 	 *
 	 * @param fullAreaCode 법정동코드 10자리
-	 * @return String ex) 11 => 서울특별시, 11110 => 서울특별시 종로구
+	 * @return String<br> ex) 11 => 서울특별시, 11110 => 서울특별시 종로구
 	 */
 	public static String getAreaCode(String fullAreaCode) {
 		if (isBlank(fullAreaCode) || fullAreaCode.length() < 10) {
