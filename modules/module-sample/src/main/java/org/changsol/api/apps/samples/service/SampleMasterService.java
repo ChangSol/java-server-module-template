@@ -2,6 +2,7 @@ package org.changsol.api.apps.samples.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.changsol.api.apps.samples.domain.SampleDetail;
 import org.changsol.api.apps.samples.domain.SampleMaster;
 import org.changsol.api.apps.samples.dto.SampleMasterDto;
 import org.changsol.api.apps.samples.mapper.SampleMasterMapper;
@@ -45,6 +46,12 @@ public class SampleMasterService {
     public SampleMasterDto.Response createOne(SampleMasterDto.CreateOrUpdate createOrUpdate){
         //New Object
         SampleMaster sampleMaster = SampleMasterMapper.INSTANCE.create(createOrUpdate);
+        if (ChangSolUtil.isNotBlank(createOrUpdate.getDetailName())) {
+            SampleDetail sampleDetail = new SampleDetail();
+            sampleDetail.setDetailName(createOrUpdate.getDetailName());
+            sampleDetail.setSampleMaster(sampleMaster);
+            sampleMaster.getSampleDetails().add(sampleDetail);
+        }
         sampleMasterRepository.save(sampleMaster);
 
         return SampleMasterMapper.INSTANCE.response(sampleMaster);
