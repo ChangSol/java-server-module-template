@@ -68,3 +68,26 @@ public List<SampleMasterDto.Response> getSampleMasterList(SampleMasterDto.Reques
                                  .toList();
 }
 ```
+- fetch join
+  - 자식 fetch 시 distinct true
+```java
+/**
+* SampleMaster Data Get
+* @param request 검색조건
+* @return SampleMasterDto.Response 리스트
+*/
+public List<SampleMasterDto.Response> getSampleMasterList(SampleMasterDto.Request request) {
+    //조건
+    ChangSolJpaRestriction restriction = new ChangSolJpaRestriction();
+    if (ChangSolUtil.isNotBlank(request.getKeyword())) {
+        restriction.like("masterName", "테스트");
+    }
+	
+    restriction.addFetch("sampleDetails", JoinType.LEFT);
+
+    return sampleMasterRepository.findAll(restriction.toSpecification())
+                                 .stream()
+                                 .map(SampleMasterMapper.INSTANCE::response)
+                                 .toList();
+}
+```
