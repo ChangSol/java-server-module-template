@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.changsol.api.apps.bases.domain.BaseDomainIdentity;
+import org.changsol.api.utils.bases.domain.ChangSolBaseDomainIdentity;
 import org.hibernate.annotations.Comment;
 
 /**
@@ -20,7 +20,7 @@ import org.hibernate.annotations.Comment;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SampleMaster extends BaseDomainIdentity {
+public class SampleMaster extends ChangSolBaseDomainIdentity {
     @Comment("마스터명")
     private String masterName;
 

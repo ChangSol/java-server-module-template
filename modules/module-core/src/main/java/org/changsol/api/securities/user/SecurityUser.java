@@ -1,4 +1,4 @@
-package org.changsol.api.security.users;
+package org.changsol.api.securities.user;
 
 import com.google.common.collect.Sets;
 import java.util.Collection;

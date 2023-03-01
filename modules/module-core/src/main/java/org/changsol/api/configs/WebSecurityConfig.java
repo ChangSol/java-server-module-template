@@ -1,11 +1,11 @@
 package org.changsol.api.configs;
 
 import lombok.RequiredArgsConstructor;
-import org.changsol.api.security.support.RestAuthenticationEntryPoint;
-import org.changsol.api.security.support.RestAuthenticationFailureHandler;
-import org.changsol.api.security.support.RestAuthenticationSuccessHandler;
-import org.changsol.api.security.support.RestLogoutSuccessHandler;
-import org.changsol.api.security.users.UserAuthenticationProvider;
+import org.changsol.api.securities.support.RestAuthenticationEntryPoint;
+import org.changsol.api.securities.support.RestAuthenticationFailureHandler;
+import org.changsol.api.securities.support.RestAuthenticationSuccessHandler;
+import org.changsol.api.securities.support.RestLogoutSuccessHandler;
+import org.changsol.api.securities.user.UserAuthenticationProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

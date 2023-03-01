@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.changsol.api.apps.bases.domain.BaseDomainIdentity;
+import org.changsol.api.utils.bases.domain.ChangSolBaseDomainIdentity;
 import org.hibernate.annotations.Comment;
 
 /**
@@ -19,7 +19,7 @@ import org.hibernate.annotations.Comment;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SampleDetail extends BaseDomainIdentity {
+public class SampleDetail extends ChangSolBaseDomainIdentity {
     @Comment("상세명")
     private String detailName;
 

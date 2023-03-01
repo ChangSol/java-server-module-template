@@ -1,4 +1,4 @@
-package org.changsol.api.security.support;
+package org.changsol.api.securities.support;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;

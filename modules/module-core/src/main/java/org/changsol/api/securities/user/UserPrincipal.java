@@ -1,4 +1,4 @@
-package org.changsol.api.security.users;
+package org.changsol.api.securities.user;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

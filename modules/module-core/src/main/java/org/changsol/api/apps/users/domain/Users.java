@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.changsol.api.apps.bases.domain.BaseDomainIdentity;
+import org.changsol.api.utils.bases.domain.ChangSolBaseDomainIdentity;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -23,7 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Getter
 @Setter
 @Entity
-public class Users extends BaseDomainIdentity {
+public class Users extends ChangSolBaseDomainIdentity {
     public enum Type {
         ADMIN, //관리자 0
         USER, //사용자 1

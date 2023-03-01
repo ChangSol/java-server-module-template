@@ -1,4 +1,4 @@
-package org.changsol.api.security.support;
+package org.changsol.api.securities.support;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

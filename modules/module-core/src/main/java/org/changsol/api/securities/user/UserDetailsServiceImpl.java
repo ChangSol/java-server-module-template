@@ -1,4 +1,4 @@
-package org.changsol.api.security.users;
+package org.changsol.api.securities.user;
 
 import lombok.RequiredArgsConstructor;
 import org.changsol.api.apps.users.domain.Users;
