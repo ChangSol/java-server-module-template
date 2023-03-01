@@ -8,16 +8,16 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.mobile.device.Device;
 import org.springframework.mobile.device.DeviceUtils;
 
 /**
  * 유틸 클래스
  */
-public class ChangSolUtil {
+public class ChangSolUtils {
 
-	private ChangSolUtil() {
+	private ChangSolUtils() {
 	}
 
 	// region isEmpty

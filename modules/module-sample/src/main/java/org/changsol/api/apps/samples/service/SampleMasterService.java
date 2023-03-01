@@ -8,8 +8,12 @@ import org.changsol.api.apps.samples.domain.SampleMaster;
 import org.changsol.api.apps.samples.dto.SampleMasterDto;
 import org.changsol.api.apps.samples.mapper.SampleMasterMapper;
 import org.changsol.api.apps.samples.repository.SampleMasterRepository;
-import org.changsol.api.utils.ChangSolUtil;
+import org.changsol.api.utils.ChangSolUtils;
 import org.changsol.api.utils.jpas.restriction.ChangSolJpaRestriction;
+import org.changsol.api.utils.page.ChangSolPageUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -28,7 +32,7 @@ public class SampleMasterService {
     public List<SampleMasterDto.Response> getSampleMasterList(SampleMasterDto.Request request) {
         //조건
         ChangSolJpaRestriction restriction = new ChangSolJpaRestriction();
-        if (ChangSolUtil.isNotBlank(request.getKeyword())) {
+        if (ChangSolUtils.isNotBlank(request.getKeyword())) {
             restriction.like("masterName", "테스트");
         }
 
@@ -42,6 +46,33 @@ public class SampleMasterService {
     }
 
     /**
+     * SampleMaster Data Get Page
+     *
+     * @param request 검색조건
+     * @return ChangSolPageUtils.Response
+     */
+    public ChangSolPageUtils.Response<SampleMasterDto.Response> getSampleMasterPage(SampleMasterDto.RequestPage request) {
+        // 정렬
+        if (ChangSolUtils.isNotBlank(request.getSortColumn()) && request.getSortType() != null) {
+
+        }
+
+        // 조건
+        ChangSolJpaRestriction restriction = new ChangSolJpaRestriction();
+        if (ChangSolUtils.isNotBlank(request.getKeyword())) {
+            restriction.like("masterName", "테스트");
+        }
+        // restriction.addFetch("sampleDetails", JoinType.LEFT);
+        restriction.addJoin("sampleDetails", JoinType.LEFT);
+
+        PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), Sort.by(Sort.Order.desc("id")));
+        Page<SampleMaster> sampleMasterPage = sampleMasterRepository.findAll(restriction.toSpecification(), pageRequest);
+        return ChangSolPageUtils.toResponse(sampleMasterPage, sampleMasterPage.stream()
+                .map(SampleMasterMapper.INSTANCE::response)
+                .toList());
+    }
+
+    /**
      * SampleMaster Data Create One
      * @param createOrUpdate 생성조건
      * @return SampleMasterDto.Response
@@ -50,7 +81,7 @@ public class SampleMasterService {
     public SampleMasterDto.Response createOne(SampleMasterDto.CreateOrUpdate createOrUpdate){
         //New Object
         SampleMaster sampleMaster = SampleMasterMapper.INSTANCE.create(createOrUpdate);
-        if (ChangSolUtil.isNotBlank(createOrUpdate.getDetailName())) {
+        if (ChangSolUtils.isNotBlank(createOrUpdate.getDetailName())) {
             SampleDetail sampleDetail = new SampleDetail();
             sampleDetail.setDetailName(createOrUpdate.getDetailName());
             sampleDetail.setSampleMaster(sampleMaster);
