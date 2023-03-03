@@ -2,7 +2,7 @@ package org.changsol.api.utils.page;
 
 import org.springframework.data.domain.Sort;
 
-enum ChangSolSortType {
+public enum ChangSolSortType {
 	ASC("오름차순",Sort.Direction.ASC),
 	DESC("내림차순", Sort.Direction.DESC);
 
