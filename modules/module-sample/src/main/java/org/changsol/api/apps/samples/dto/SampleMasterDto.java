@@ -2,7 +2,6 @@ package org.changsol.api.apps.samples.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.changsol.api.utils.page.ChangSolPageUtils;
 
@@ -11,26 +10,23 @@ import org.changsol.api.utils.page.ChangSolPageUtils;
  */
 public class SampleMasterDto {
 
-    @Schema(description = "SampleMaster Request")
+    @Schema(title = "SampleMaster Request")
     @Getter
     @Setter
-    @NoArgsConstructor
     public static class Request {
         private String keyword;
     }
 
-    @Schema(description = "SampleMaster Request Page")
+    @Schema(title = "SampleMaster Request Page")
     @Getter
     @Setter
-    @NoArgsConstructor
     public static class RequestPage extends ChangSolPageUtils.Request {
         private String keyword;
     }
 
-    @Schema(description = "SampleMaster Response")
+    @Schema(title = "SampleMaster Response")
     @Getter
     @Setter
-    @NoArgsConstructor
     public static class Response {
         @Schema(description = "고유ID")
         private Long id;
@@ -38,10 +34,9 @@ public class SampleMasterDto {
         private String masterName;
     }
 
-    @Schema(description = "SampleMaster CreateOrUpdate")
+    @Schema(title = "SampleMaster CreateOrUpdate")
     @Getter
     @Setter
-    @NoArgsConstructor
     public static class CreateOrUpdate {
         @Schema(description = "마스터 이름", example = "창솔루션")
         private String masterName;
