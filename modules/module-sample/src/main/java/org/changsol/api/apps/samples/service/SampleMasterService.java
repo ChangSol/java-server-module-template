@@ -72,10 +72,13 @@ public class SampleMasterService {
 		// 조건
 		ChangSolJpaRestriction restriction = new ChangSolJpaRestriction();
 		if (ChangSolUtils.isNotBlank(request.getKeyword())) {
-			restriction.like("masterName", "테스트");
+			restriction.like("masterName", request.getKeyword());
+
+			//하위 검색 처리
+			restriction.like("sampleDetails.detailName.", request.getKeyword());
 		}
 		// restriction.addFetch("sampleDetails", JoinType.LEFT);
-		restriction.addJoin("sampleDetails", JoinType.LEFT);
+		// restriction.addJoin("sampleDetails", JoinType.LEFT);
 
 		PageRequest pageRequest = PageRequest.of(request.getPage(), request.getLimit(), sort);
 		Page<SampleMaster> sampleMasterPage = sampleMasterRepository.findAll(restriction.toSpecification(), pageRequest);
