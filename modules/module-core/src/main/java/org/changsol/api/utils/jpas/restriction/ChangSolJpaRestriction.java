@@ -507,9 +507,6 @@ public class ChangSolJpaRestriction {
 			}
 			// endregion
 
-			// query distinct 처리여부
-			query.distinct(isDistinctQuery);
-
 			List<Predicate> predicateList = Lists.newArrayList();
 			for (ChangSolJpaCondition condition : conditionList) {
 				String columnName1 = condition.getColumnName1();
@@ -519,6 +516,9 @@ public class ChangSolJpaRestriction {
 
 				predicateList.addAll(getPredicateList(condition.getConditionType(), root, criteriaBuilder, columnName1, columnName2, value1, value2));
 			}
+
+			// query distinct 처리여부
+			query.distinct(isDistinctQuery);
 
 			if (predicateList.size() > 1) {
 				Predicate[] ps = predicateList.toArray(new Predicate[]{});
@@ -663,31 +663,25 @@ public class ChangSolJpaRestriction {
 		return predicateList;
 	}
 
-	private <Y> Path<Y> getPath(Root<?> root, String key) {
-		Path<Y> path = null;
+	private <T> Path<T> getPath(Root<?> root, String columnName) {
+		Path<T> path = null;
 		Join<?, ?> joinOption = null;
-		if (key.contains(".")) {
-			String[] keySplit = key.split("\\.");
+		final String[] COLUMN_NAMES = columnName.split("\\.");
+		if (COLUMN_NAMES.length > 1) {
 			int count = 1;
-			for (String k : keySplit) {
-				if (path == null) {
-					joinOption = root.join(k, JoinType.LEFT);
-					path = root.get(k);
+			for (String key : COLUMN_NAMES) {
+				if (count != COLUMN_NAMES.length) {
+					joinOption = joinOption == null ? root.join(key, JoinType.LEFT) : joinOption.join(key, JoinType.LEFT);
 				} else {
-					if (count != keySplit.length) {
-						joinOption = joinOption.join(k, JoinType.LEFT);
-					}
-					if (isCollectionType(path.getJavaType())) {
-						isDistinctQuery = true;
-						path = joinOption.get(k);
-					} else {
-						path = path.get(k);
-					}
+					path = joinOption.get(key);
+				}
+				if (isCollectionType(joinOption.getClass())) {
+					isDistinctQuery = true;
 				}
 				count++;
 			}
 		} else {
-			path = root.get(key);
+			path = root.get(columnName);
 		}
 		return path;
 	}

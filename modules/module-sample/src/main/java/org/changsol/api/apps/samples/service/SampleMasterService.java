@@ -36,7 +36,14 @@ public class SampleMasterService {
 		// 조건
 		ChangSolJpaRestriction restriction = new ChangSolJpaRestriction();
 		if (ChangSolUtils.isNotBlank(request.getKeyword())) {
-			restriction.like("masterName", "테스트");
+			final String KEYWORD = "%" + request.getKeyword() + "%";
+			restriction.like("masterName", KEYWORD);
+
+			// 디테일
+			restriction.like("sampleDetails.detailName", KEYWORD);
+
+			// 디테일 -> 유저
+			restriction.like("sampleDetails.user.name", KEYWORD);
 		}
 
 		// restriction.addFetch("sampleDetails", JoinType.LEFT);
