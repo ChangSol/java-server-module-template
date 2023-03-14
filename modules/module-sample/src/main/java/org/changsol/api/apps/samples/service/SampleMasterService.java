@@ -46,8 +46,8 @@ public class SampleMasterService {
 			restriction.like("sampleDetails.user.name", KEYWORD);
 		}
 
-		// restriction.addFetch("sampleDetails", JoinType.LEFT);
-		restriction.addJoin("sampleDetails", JoinType.LEFT);
+		restriction.addFetch("sampleDetails", JoinType.LEFT);
+		// restriction.addJoin("sampleDetails", JoinType.LEFT);
 
 		return sampleMasterRepository.findAll(restriction.toSpecification())
 									 .stream()

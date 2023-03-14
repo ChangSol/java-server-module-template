@@ -665,19 +665,39 @@ public class ChangSolJpaRestriction {
 
 	private <T> Path<T> getPath(Root<?> root, String columnName) {
 		Path<T> path = null;
-		Join<?, ?> joinOption = null;
 		final String[] COLUMN_NAMES = columnName.split("\\.");
 		if (COLUMN_NAMES.length > 1) {
+			Set<? extends Fetch<?, ?>> fetches = root.getFetches();
+			Set<? extends Join<?, ?>> joins = root.getJoins();
+			Join<?, ?> join = null;
 			int count = 1;
 			for (String key : COLUMN_NAMES) {
 				if (count != COLUMN_NAMES.length) {
-					joinOption = joinOption == null ? root.join(key, JoinType.LEFT) : joinOption.join(key, JoinType.LEFT);
+					Fetch<?, ?> fetchCheck = fetches.stream()
+													.filter(x -> x.getAttribute().getName().equals(key))
+													.findAny()
+													.orElse(null);
+					if (fetchCheck != null) {
+						join = (Join<?, ?>) fetchCheck;
+					} else {
+						Join<?, ?> joinCheck = joins.stream()
+													.filter(x -> x.getAttribute().getName().equals(key))
+													.findAny()
+													.orElse(null);
+						if (joinCheck != null) {
+							join = joinCheck;
+						} else {
+							join = join == null ? root.join(key, JoinType.LEFT) : join.join(key, JoinType.LEFT);
+						}
+					}
 				} else {
-					path = joinOption.get(key);
+					path = join.get(key);
 				}
-				if (isCollectionType(joinOption.getClass())) {
+
+				if (isCollectionType(join.getClass())) {
 					isDistinctQuery = true;
 				}
+
 				count++;
 			}
 		} else {
