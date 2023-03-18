@@ -1,12 +1,8 @@
 package org.changsol.api.apps.samples.domain;
 
-import com.google.common.collect.Sets;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,29 +14,23 @@ import org.hibernate.annotations.Comment;
 /**
  * @author ChangSol
  * @version 0.0.1
- * @see SampleDetail
+ * @see SampleDetailSub
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class SampleDetail extends ChangSolBaseDomainIdentity {
-    @Comment("상세명")
-    private String detailName;
+public class SampleDetailSub extends ChangSolBaseDomainIdentity {
+    @Comment("상세서브명")
+    private String detailSubName;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @Comment("마스터 정보")
-    private SampleMaster sampleMaster;
+    @Comment("디테일 정보")
+    private SampleDetail sampleDetail;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @Comment("유저 정보")
     private Users user;
-
-    /**
-     * 디테일 서브 목록
-     */
-    @OneToMany(mappedBy = "sampleDetail", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SampleDetailSub> sampleDetailSubs = Sets.newHashSet();
 }

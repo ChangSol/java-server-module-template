@@ -44,6 +44,9 @@ public class SampleMasterService {
 
 			// 디테일 -> 유저
 			restriction.like("sampleDetails.user.name", KEYWORD);
+
+			// 디테일 -> 디테일서브 -> 유저
+			restriction.like("sampleDetails.sampleDetailSubs.user.name", KEYWORD);
 		}
 
 		restriction.addFetch("sampleDetails", JoinType.LEFT);
