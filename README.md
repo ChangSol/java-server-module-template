@@ -2,19 +2,15 @@
 
 ### SpringBoot Server(API) Service를 위한 Template
 
-### 버전
-Java 16<br>
-Spring Boot 2.6.6<br>
-Gradle-7.2<br>
-
 ### 기본환경
 - 사용포트 : 8080<br>
 - swagger url : http://localhost:8080/swagger-ui/
 
 ### 기술 스택
-- JAVA
-- SpringBoot
-- JPA (Spring Data JPA), Hibernate
+- JAVA 16
+- Gradle 7.2
+- SpringBoot 2.6.6
+- JPA (Spring Data JPA), Hibernate 5.6.5
 - MySQL or PostgreSQL or H2 선택
 
 ### 구축 내용
@@ -22,9 +18,6 @@ Gradle-7.2<br>
 - JPA(Spring-JPA) 사용
 - H2 DB를 사용하여 Sample 진행
 - SpringDoc를 통한 OpenAPI(3.0) 진행 (Swagger3)
-
-### ERD 
-- https://www.erdcloud.com/
 
 ### Gradle Module 스크립트
 - ex) module-sample<br>
