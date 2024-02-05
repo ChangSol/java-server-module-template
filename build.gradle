@@ -75,10 +75,3 @@ subprojects {
         useJUnitPlatform()
     }
 }
-
-//Module Include
-project(':module-sample') {
-    dependencies {
-        implementation project(':module-core')
-    }
-}

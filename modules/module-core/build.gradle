@@ -1,2 +1,6 @@
 bootJar { enabled = false }
 jar { enabled = true }
+
+dependencies {
+    implementation 'commons-io:commons-io:2.11.0'
+}
